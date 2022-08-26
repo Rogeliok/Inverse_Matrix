@@ -1,4 +1,4 @@
-// Copyright 2022 rogeliok
+// Copyright 2022 Rogeliok
 
 #include <stdio.h>
 #include <stdlib.h>
