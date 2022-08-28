@@ -1,4 +1,4 @@
-// Copyright 2022 rogeliok
+// Copyright 2022 Rogelio_Kiera
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -138,10 +138,10 @@ void direct_Gauss(double** mat, int row, int col) {
     double d = 0.0;
     double* c = (double*)malloc(col * sizeof(double));
     if (c != NULL) {
-        for (int f = 0; f < row; f++) {  // свидение к ступенчатому виду
-            for (int k = f; k < row - 1; k++) {  // сортировка строк
+        for (int f = 0; f < row; f++) {
+            for (int k = f; k < row - 1; k++) {
                 for (int j = f; j < row - 1; j++) {
-                    if (mat[j][f] == 0.0) {  // swap строк
+                    if (mat[j][f] == 0.0) {
                         for (int i = 0; i < col; i++)
                             c[i] = mat[j][i];
                         for (int i = 0; i < col; i++)
@@ -151,7 +151,7 @@ void direct_Gauss(double** mat, int row, int col) {
                     }
                 }
             }
-            for (int i = f + 1; i < row; i++) {  // сердце кода
+            for (int i = f + 1; i < row; i++) {
                 d = mat[i][f];
                 for (int j = f; j < col; j++)
                     mat[i][j] = mat[i][j] - mat[f][j] * d / mat[f][f];
@@ -166,7 +166,7 @@ void direct_Gauss(double** mat, int row, int col) {
 void inverse_Gauss(double** mat, int row, int col, double* roots) {
     double s;
     roots[row - 1] = mat[row - 1][col - 1] / mat[row - 1][col - 2];
-    for (int i = row - 2; i >= 0; i--) {  // нахождение корней
+    for (int i = row - 2; i >= 0; i--) {
         s = 0.0;
         roots[i] = 0.0;
         for (int j = col - 2; j != i; j--)
@@ -185,14 +185,14 @@ double** invert_matrix(double** mat, int n) {
         double* ptr = (double*)(g + n);
         for (int i = 0; i < n; i++)
             g[i] = ptr + (n + 1) * i;
-        for (int i = 0; i < n; i++) {  // основной цикл
-            for (int i1 = 0; i1 < n; ++i1) {  // заполнене матрицы g для гаусса
+        for (int i = 0; i < n; i++) {
+            for (int i1 = 0; i1 < n; ++i1) {
                 for (int j = 0; j < n; ++j)
                     g[i1][j] = mat[i1][j];
                 i1 == i ? g[i1][n] = 1.0 : g[i1][n] = 0.0;
             }
             sle(g, n, n + 1, b);
-            for (int i1 = 0; i1 < n; ++i1)  // передача значений элементов обратной матрицы из цикла
+            for (int i1 = 0; i1 < n; ++i1)
                 temp[i1][i] = b[i1];
         }
     } else {
@@ -202,7 +202,7 @@ double** invert_matrix(double** mat, int n) {
     free(b);
     for (int i = 0; i < n; i++)
         delete []mat[i];
-    delete []mat;  // may be delete this block
+    delete []mat;
     return temp;
 }
 
